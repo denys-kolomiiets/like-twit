@@ -1,39 +1,50 @@
-import useLoginModal from "@/hooks/useLoginModal";
 import React, { useCallback, useState } from "react";
 import Input from "../Input";
 import Modal from "../Modal";
 import useRegisterModal from "@/hooks/useRegisterModal";
+import useLoginModal from "@/hooks/useLoginModal";
 
-const LoginModal = () => {
+const RegisterModal = () => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = useCallback(async () => {
     try {
       setIsLoading(true);
-      //TODO add log in
-      loginModal.onClose();
+      //TODO add  register and log in
+      registerModal.onClose();
     } catch (error) {
       console.log(error);
     } finally {
       setIsLoading(false);
     }
-  }, [loginModal]);
+  }, [registerModal]);
 
   const onToggle = useCallback(() => {
     if (isLoading) {
       return;
     }
 
-    loginModal.onClose();
-    registerModal.onOpen();
+    registerModal.onClose();
+    loginModal.onOpen();
   }, [isLoading, registerModal, loginModal]);
-
   const bodyContent = (
     <div className="flex flex-col gap-4">
+      <Input
+        placeholder="Name"
+        onChange={(e) => setName(e.target.value)}
+        disabled={isLoading}
+      />
+      <Input
+        placeholder="Username"
+        onChange={(e) => setUserName(e.target.value)}
+        disabled={isLoading}
+      />
       <Input
         placeholder="Email"
         onChange={(e) => setEmail(e.target.value)}
@@ -50,12 +61,12 @@ const LoginModal = () => {
   const footerContent = (
     <div className="text-center mt-4 text-neutral-400">
       <p>
-        Don&apos;t have an account?{" "}
+        Already have an account?{" "}
         <span
           onClick={onToggle}
           className="text-white cursor-pointer hover:underline"
         >
-          Create an account
+          Sign in
         </span>
       </p>
     </div>
@@ -63,10 +74,10 @@ const LoginModal = () => {
   return (
     <Modal
       disabled={isLoading}
-      onClose={loginModal.onClose}
-      isOpen={loginModal.isOpen}
-      title="Login"
-      actionLabel="Sign In"
+      onClose={registerModal.onClose}
+      isOpen={registerModal.isOpen}
+      title="Create an account"
+      actionLabel="Register"
       onSubmit={onSubmit}
       body={bodyContent}
       footer={footerContent}
@@ -74,4 +85,4 @@ const LoginModal = () => {
   );
 };
 
-export default LoginModal;
+export default RegisterModal;
