@@ -13,7 +13,10 @@ const Avatar: React.FC<AvatarProps> = ({ userId, isLarge, hasBorder }) => {
   const onClick = useCallback(
     (e: any) => {
       e.stopPropagation();
-      const url = `users/${userId}`;
+      let url = `users/${userId}`;
+      if (router.pathname.startsWith("/users/")) {
+        url = `${userId}`;
+      }
       router.push(url);
     },
     [userId, router]
