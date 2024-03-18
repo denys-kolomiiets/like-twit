@@ -6,6 +6,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Modal from "../Modal";
 import Input from "../Input";
+import ImageUpload from "../ImageUpload";
 const EditModal = () => {
   const { data: currentUser } = useCurrentUser();
   const { mutate: mutateFetchedUser } = useUser(currentUser?.id);
@@ -66,10 +67,32 @@ const EditModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
+      <ImageUpload
+        value={profileImage}
+        onChange={(image) => setProfileImage(image)}
+        disabled={isLoading}
+        label="Upload profile image"
+      />
+      <ImageUpload
+        value={coverImage}
+        onChange={(image) => setCoverImage(image)}
+        disabled={isLoading}
+        label="Upload cover image"
+      />
       <Input
         value={name}
         placeholder="Name"
         onChange={(e) => setName(e.target.value)}
+      />
+      <Input
+        value={username}
+        placeholder="Username"
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <Input
+        value={bio}
+        placeholder="Bio"
+        onChange={(e) => setBio(e.target.value)}
       />
     </div>
   );
