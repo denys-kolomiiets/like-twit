@@ -6,7 +6,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method !== "POST") {
-    return res.status(405).end();
+    res.status(405).end();
   }
 
   try {
@@ -21,9 +21,9 @@ export default async function handler(
         hashedPassword,
       },
     });
-    return res.status(200).json(user);
+    res.status(200).json(user);
   } catch (error) {
     console.log(error);
-    return res.status(400).end();
+    res.status(400).end();
   }
 }
