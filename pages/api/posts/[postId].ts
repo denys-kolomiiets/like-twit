@@ -9,7 +9,7 @@ export default async function handler(
   }
 
   try {
-    const { postId } = req.body;
+    const { postId } = req.query;
 
     if (!postId || typeof postId !== "string") {
       throw new Error("Invalid ID");
