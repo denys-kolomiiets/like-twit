@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import { NextPageContext } from "next";
 import React from "react";
 import { getSession } from "next-auth/react";
-
+import NotificationsFeed from "@/components/NotificationsFeed";
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
 
@@ -25,6 +25,7 @@ const Notifications = () => {
   return (
     <>
       <Header label="Notifications" />
+      <NotificationsFeed />
     </>
   );
 };
