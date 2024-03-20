@@ -1,14 +1,20 @@
 import useUsers from "@/hooks/useUsers";
 import React from "react";
 import Avatar from "../Avatar";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 const FollowBar = () => {
-  const { data: users = [] } = useUsers();
+  let { data: users = [] } = useUsers();
+  const { data: currentUser } = useCurrentUser();
 
   if (users.length === 0) {
     return null;
   }
-
+  if (currentUser) {
+    users = users.filter(
+      (user: Record<string, any>) => user.id !== currentUser.id
+    );
+  }
   return (
     <div className="px-6 py-4 hidden lg:block">
       <div className="bg-neutral-800 rounded-xl p-4">
