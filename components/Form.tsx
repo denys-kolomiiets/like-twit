@@ -31,7 +31,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
 
       const url = isComment ? `/api/comments?postId=${postId}` : "/api/posts";
       await axios.post(url, { body });
-      toast.success("Tweet created");
+      toast.success("Post created");
       setBody("");
       mutatePosts();
       mutatePost();
@@ -71,7 +71,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
             <hr className="opacity-0 peer-focus:opacity-100 h-[1px] w-full border-neutral-800 transition" />
             <div className="mt-4 flex flex-row justify-end">
               <Button
-                label="Tweet"
+                label="Meow"
                 disabled={isLoading || !body}
                 onClick={onSubmit}
               />
@@ -81,7 +81,7 @@ const Form: React.FC<FormProps> = ({ placeholder, isComment, postId }) => {
       ) : (
         <div className="py-8">
           <h1 className="text-white font-bold text-center mb-4 text-2xl">
-            Welcome to twit app!
+            Welcome to meowtter app!
           </h1>
           <div className="flex flex-row justify-center items-center gap-4">
             <Button label="Login" onClick={loginModal.onOpen} />
