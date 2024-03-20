@@ -1,4 +1,4 @@
-import { BsBellFill, BsHouseFill } from "react-icons/bs";
+import { BsBellFill } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 import SidebarLogo from "./SidebarLogo";
 import SidebarItem from "./SidebarItem";
@@ -6,13 +6,14 @@ import SidebarTweetButton from "./SidebarTweetButton";
 import { BiLogOut } from "react-icons/bi";
 import { signOut } from "next-auth/react";
 import useCurrentUser from "@/hooks/useCurrentUser";
+import { FaFaceSmile, FaHouse } from "react-icons/fa6";
 const Sidebar = () => {
   const { data: currentUser } = useCurrentUser();
   const items = [
     {
       label: "Home",
       href: "/",
-      icon: BsHouseFill,
+      icon: FaHouse,
     },
     {
       label: "Notifications",
@@ -24,7 +25,7 @@ const Sidebar = () => {
     {
       label: "Profile",
       href: `/users/${currentUser?.id}`,
-      icon: FaUser,
+      icon: FaFaceSmile,
       auth: true,
     },
   ];
@@ -32,7 +33,13 @@ const Sidebar = () => {
     <div className="col-span-1 h-full pr-4 md:pr-4">
       <div className="flex flex-col items-end">
         <div className="space-y-2 lg:w-[230px]">
-          <SidebarLogo />
+          <div className="flex flex-row items-center">
+            <SidebarLogo />{" "}
+            <span className="hidden lg:block text-white text-xl font-bold">
+              Meowtter
+            </span>
+          </div>
+
           {items.map((item) => (
             <SidebarItem
               key={item.href}
@@ -50,7 +57,6 @@ const Sidebar = () => {
               label="Logout"
             />
           )}
-
           <SidebarTweetButton />
         </div>
       </div>
